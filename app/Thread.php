@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Thread
@@ -23,10 +24,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
  */
 class Thread extends Model
 {
-    //
+    /**
+     * @return HasMany
+     */
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 
     public function path()
     {

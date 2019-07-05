@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Reply
@@ -23,8 +24,15 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Reply whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Reply whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\User $owner
  */
 class Reply extends Model
 {
-    //
+    /**
+     * @return BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
