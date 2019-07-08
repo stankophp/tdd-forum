@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -25,9 +26,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUserId($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
+ * @property-read \App\User $creator
  */
 class Thread extends Model
 {
+    protected $guarded = [];
+
     /**
      * @return HasMany
      */
@@ -35,9 +39,21 @@ class Thread extends Model
     {
         return $this->hasMany(Reply::class);
     }
+    /**
+     * @return BelongsTo
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function path()
     {
         return route('threads.show', $this->id);
+    }
+
+    public function addReply($reply)
+    {
+        $this->replies()->create($reply);
     }
 }

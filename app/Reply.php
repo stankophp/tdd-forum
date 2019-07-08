@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Reply extends Model
 {
+    protected $guarded = [];
+
     /**
      * @return BelongsTo
      */
