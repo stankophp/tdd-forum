@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
  * @property-read \App\User $creator
+ * @property-read \App\Channel $channel
  */
 class Thread extends Model
 {
@@ -46,10 +47,18 @@ class Thread extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    /**
+     * @return BelongsTo
+     */
+    public function channel()
+    {
+        return $this->belongsTo(Channel::class);
+    }
 
     public function path()
     {
-        return route('threads.show', $this->id);
+//        return route('threads.show', $this->id);
+        return 'threads/' . $this->channel->slug . '/' . $this->id;
     }
 
     public function addReply($reply)

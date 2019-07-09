@@ -5,9 +5,6 @@ namespace Tests\Unit;
 use App\Thread;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 
 class ThreadTest extends TestCase
 {
@@ -21,8 +18,6 @@ class ThreadTest extends TestCase
         parent::setUp();
 
         $this->thread = create('App\Thread');
-
-
     }
 
     /** @test */
@@ -34,8 +29,6 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_has_creator()
     {
-        /** @var Thread $thread */
-        $thread = create('App\Thread');
         $this->assertInstanceOf('App\User', $this->thread->creator);
     }
 
@@ -47,5 +40,18 @@ class ThreadTest extends TestCase
             'user_id' => 1
         ]);
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    /** @test */
+    public function a_thread_belongs_to_channel()
+    {
+        $this->assertInstanceOf('App\Channel', $this->thread->channel);
+    }
+
+
+    /** @test */
+    public function a_thread_can_make_a_string_path()
+    {
+        $this->assertEquals('threads/' . $this->thread->channel->slug . '/' . $this->thread->id, $this->thread->path());
     }
 }

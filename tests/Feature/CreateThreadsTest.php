@@ -3,11 +3,8 @@
 namespace Tests\Feature;
 
 use App\Thread;
-use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateThreadsTest extends TestCase
 {
@@ -23,7 +20,7 @@ class CreateThreadsTest extends TestCase
 
         $this->post('/threads', $thread->toArray());
 
-        $this->get('/threads/1')
+        $this->get('/threads/'.$thread->channel->slug.'/1')
             ->assertSee($thread->title)
             ->assertSee($thread->body);
 
