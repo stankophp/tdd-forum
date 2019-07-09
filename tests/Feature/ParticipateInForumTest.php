@@ -19,14 +19,14 @@ class ParticipateInForumTest extends TestCase
     public function an_authenticated_user_may_participate()
     {
         /** @var User $user */
-        $user = factory('App\User')->create();
-        $this->be($user);
+        $user = create('App\User');
+        $this->actingAs($user);
 
         /** @var Thread $thread */
-        $thread = factory('App\Thread')->create();
+        $thread = create('App\Thread');
 
         /** @var Reply $reply */
-        $reply = factory('App\Reply')->make();
+        $reply = make('App\Reply');
 
         $this->post($thread->path().'/replies', $reply->toArray());
 

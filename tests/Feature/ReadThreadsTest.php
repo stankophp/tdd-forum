@@ -44,7 +44,7 @@ class ReadThreadsTest extends TestCase
     public function a_user_can_view_response_for_thread()
     {
         /** @var Reply $reply */
-        $reply = factory('App\Reply')->create(['thread_id' => $this->thread->id]);
+        $reply = create('App\Reply', ['thread_id' => $this->thread->id]);
         $response = $this->get($this->thread->path());
         $response->assertStatus(200);
         $response->assertSee($reply->body);
