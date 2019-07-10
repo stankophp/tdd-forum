@@ -41,4 +41,19 @@ class ParticipateInForumTest extends TestCase
 
         $this->post('threads/asd/1/replies', []);
     }
+
+    /** @test */
+    public function a_reply_must_have_a_body()
+    {
+        $this->withExceptionHandling()->signIn();
+
+        /** @var Thread $thread */
+        $thread = create('App\Thread');
+
+        /** @var Reply $reply */
+        $reply = make('App\Reply', ['body' => null]);
+
+        $this->post($thread->path().'/replies', $reply->toArray())
+            ->assertSessionHasErrors('body');
+    }
 }

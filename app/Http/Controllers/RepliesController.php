@@ -40,9 +40,14 @@ class RepliesController extends Controller
      * @param string $channel
      * @param Thread $thread
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, $channel, Thread $thread)
     {
+        $this->validate($request, [
+            'body' => 'required',
+        ]);
+
         $thread->addReply([
            'body' => $request->get('body'),
            'user_id' => auth()->id()

@@ -18,9 +18,10 @@ class CreateThreadsTest extends TestCase
         /** @var Thread $thread */
         $thread = make('App\Thread');
 
-        $this->post('/threads', $thread->toArray());
+        $response = $this->post('/threads', $thread->toArray());
 
-        $this->get('/threads/'.$thread->channel->slug.'/1')
+//        $this->get('/threads/'.$thread->channel->slug.'/1')
+        $this->get($response->headers->get('Location'))
             ->assertSee($thread->title)
             ->assertSee($thread->body);
 
@@ -44,5 +45,44 @@ class CreateThreadsTest extends TestCase
         $thread = make('App\Thread');
 
         $this->post('/threads', $thread->toArray());
+    }
+
+    /** @test */
+    public function a_thread_requires_a_title()
+    {
+        $this->publishThread(['title' => null])
+            ->assertSessionHasErrors('title');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_body()
+    {
+        $this->publishThread(['body' => null])
+            ->assertSessionHasErrors('body');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_valid_channel()
+    {
+        factory('App\Channel', 3)->create();
+
+        $this->publishThread(['channel_id' => null])
+            ->assertSessionHasErrors('channel_id');
+
+        $this->publishThread(['channel_id' => 999])
+            ->assertSessionHasErrors('channel_id');
+
+        $this->publishThread(['channel_id' => 1])
+            ->assertSessionHasNoErrors();
+    }
+
+    protected function publishThread($params)
+    {
+        $this->withExceptionHandling()
+            ->signIn();
+
+        $thread = make('App\Thread', $params);
+
+        return $this->post('/threads', $thread->toArray());
     }
 }
