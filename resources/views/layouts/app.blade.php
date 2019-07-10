@@ -29,6 +29,9 @@
                 <a class="navbar-brand" href="{{ url('/threads') }}">
                     All Threads
                 </a>
+                <a class="navbar-brand" href="{{ url('/threads/create') }}">
+                    New Thread
+                </a>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Channels
