@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
  * @property-read \App\User $creator
  * @property-read \App\Channel $channel
+ * @property int $channel_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereChannelId($value)
  */
 class Thread extends Model
 {
@@ -57,7 +59,6 @@ class Thread extends Model
 
     public function path()
     {
-//        return route('threads.show', $this->id);
         return 'threads/' . $this->channel->slug . '/' . $this->id;
     }
 

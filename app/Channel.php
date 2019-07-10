@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * App\Channel
  *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Thread[] $threads
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel newQuery()
@@ -16,6 +26,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Channel extends Model
 {
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * @return HasMany
      */
