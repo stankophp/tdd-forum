@@ -2,8 +2,11 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Channel
@@ -11,17 +14,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string $name
  * @property string $slug
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Thread[] $threads
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Channel query()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|\App\Channel whereCreatedAt($value)
+ * @method static Builder|\App\Channel whereId($value)
+ * @method static Builder|\App\Channel whereName($value)
+ * @method static Builder|\App\Channel whereSlug($value)
+ * @method static Builder|\App\Channel whereUpdatedAt($value)
+ * @property-read Collection|\App\Thread[] $threads
+ * @method static Builder|\App\Channel newModelQuery()
+ * @method static Builder|\App\Channel newQuery()
+ * @method static Builder|\App\Channel query()
  * @mixin \Eloquent
  */
 class Channel extends Model

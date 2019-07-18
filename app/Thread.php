@@ -2,9 +2,12 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Thread
@@ -13,23 +16,23 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $user_id
  * @property string $title
  * @property string $body
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereBody($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUserId($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|\App\Thread newModelQuery()
+ * @method static Builder|\App\Thread newQuery()
+ * @method static Builder|\App\Thread query()
+ * @method static Builder|\App\Thread whereBody($value)
+ * @method static Builder|\App\Thread whereCreatedAt($value)
+ * @method static Builder|\App\Thread whereId($value)
+ * @method static Builder|\App\Thread whereTitle($value)
+ * @method static Builder|\App\Thread whereUpdatedAt($value)
+ * @method static Builder|\App\Thread whereUserId($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
+ * @property-read Collection|\App\Reply[] $replies
  * @property-read \App\User $creator
  * @property-read \App\Channel $channel
  * @property int $channel_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereChannelId($value)
+ * @method static Builder|\App\Thread whereChannelId($value)
  */
 class Thread extends Model
 {
