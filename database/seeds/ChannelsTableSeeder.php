@@ -10,6 +10,6 @@ class ChannelsTableSeeder extends Seeder
     {
         DB::table('channels')->delete();
 
-        factory(App\Channel::class, 10)->create();
+//        factory(App\Channel::class, 10)->create();
     }
 }
